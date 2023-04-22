@@ -1,19 +1,9 @@
-import 'dart:ffi';
-import 'dart:ui';
-
 import 'package:appf_review/page/HomePage.dart';
 import 'package:appf_review/page/SignUpPage.dart';
-
 import 'package:appf_review/services/auth_method.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-
-import 'package:appf_review/model/user.dart';
-import 'package:appf_review/model/utilities.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:utility/utility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignInForm extends StatefulWidget {
@@ -23,7 +13,6 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
-  bool _value = false;
 
   var prefs;
   final username = TextEditingController();
@@ -96,7 +85,6 @@ class _SignInFormState extends State<SignInForm> {
                     TextFormField(
                       controller: password,
                       validator: (value) {
-                        ////////////////////////////////////////////////////
                         return;
                       },
                       keyboardType: TextInputType.number,

@@ -5,9 +5,4 @@ class Categories {
   int? id;
   String? title;
   String? image;
-
-  // static List<Categories> init(){
-  //   List<Categories> data = [];
-  //   return data;
-  // }
 }

@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   //publish ra ngoài
   Stream<User?> get authChanges => _auth.authStateChanges();
   User get user => _auth.currentUser!;
@@ -39,7 +38,20 @@ class AuthMethods {
     return isAuth;
   }
 
-  void signOut(BuildContext context) async {
+  signUp(email, password) async {
+    UserCredential userCredential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+
+    // Lưu thông tin người dùng vào Firestore
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userCredential.user!.uid)
+        .set({
+      'email': email,
+    });
+  }
+
+  signOut(BuildContext context) async {
     try {
       _auth.signOut();
       Navigator.pushNamedAndRemoveUntil(

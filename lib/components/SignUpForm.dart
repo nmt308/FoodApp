@@ -1,11 +1,6 @@
+import 'package:appf_review/services/auth_method.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:appf_review/model/user.dart';
-import 'package:appf_review/model/utilities.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:quiver/strings.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 
 class SignUpForm extends StatefulWidget {
@@ -20,20 +15,6 @@ class _SignUpFormState extends State<SignUpForm> {
 
   final _formKey = GlobalKey<FormState>();
   var _passKey = GlobalKey<FormFieldState>();
-
-  Future signUp() async {
-    UserCredential userCredential = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text);
-
-    // Lưu thông tin người dùng vào Firestore
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userCredential.user!.uid)
-        .set({
-      'email': emailController.text,
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +40,8 @@ class _SignUpFormState extends State<SignUpForm> {
             width: MediaQuery.of(context).size.width,
             child: MaterialButton(
               onPressed: () {
-                signUp();
+                AuthMethods()
+                    .signUp(emailController.text, passwordController.text);
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
@@ -168,14 +150,12 @@ class _SignUpFormState extends State<SignUpForm> {
         suffixIcon: Icon(Icons.lock_outlined),
       ),
       validator: (value) {
-        // Perform conform password validation logic here
-        // Example: check if conform password matches the original password
         if (value == null || value.isEmpty) {
           return 'Confirm password is required';
         } else if (value != passwordController.text) {
           return 'Confirm password does not match';
         }
-        return null; // Return null if conform password is valid
+        return null;
       },
     );
   }

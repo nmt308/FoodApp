@@ -1,8 +1,5 @@
 import 'package:appf_review/model/orders.dart';
 import 'package:appf_review/services/firestore_method.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:appf_review/model/products.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 

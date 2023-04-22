@@ -1,6 +1,5 @@
 import 'package:appf_review/components/SignUpForm.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class SignUpPage extends StatelessWidget {
   static String routeName = "/sign_up";

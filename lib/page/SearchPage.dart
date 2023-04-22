@@ -1,7 +1,6 @@
 import 'package:appf_review/model/products.dart';
 import 'package:appf_review/page/ProductPage.dart';
 import 'package:appf_review/services/firestore_method.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {

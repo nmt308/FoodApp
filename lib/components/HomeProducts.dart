@@ -1,3 +1,4 @@
+import 'package:appf_review/page/AllProductPage.dart';
 import 'package:appf_review/page/ProductPage.dart';
 import 'package:appf_review/services/firestore_method.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,9 +25,17 @@ class HomeProducts extends StatelessWidget {
                     fontSize: 18,
                     color: Colors.green),
               )),
-              Text(
-                'See more',
-                style: TextStyle(fontSize: 16, color: Colors.lightGreen),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AllProductPage()),
+                  );
+                },
+                child: Text(
+                  "See more",
+                  style: TextStyle(fontSize: 16, color: Colors.lightGreen),
+                ),
               )
             ],
           ),
@@ -46,7 +55,7 @@ class HomeProducts extends StatelessWidget {
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     primary: false,
-                    itemCount: docs.length,
+                    itemCount: 6,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         mainAxisSpacing: 10,

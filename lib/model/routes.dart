@@ -1,3 +1,5 @@
+import 'package:appf_review/page/AllCategoryPage.dart';
+import 'package:appf_review/page/AllProductPage.dart';
 import 'package:appf_review/page/CartPage.dart';
 import 'package:appf_review/page/HomePage.dart';
 import 'package:appf_review/page/OrderPage.dart';
@@ -16,5 +18,7 @@ final Map<String, WidgetBuilder> routes = {
   ProductPage.routeName: (context) => ProductPage(),
   CartPage.routeName: (context) => CartPage(),
   SearchPage.routeName: (context) => SearchPage(),
-  OrderPage.routeName: (context) => OrderPage()
+  OrderPage.routeName: (context) => OrderPage(),
+  AllProductPage.routeName: (context) => AllProductPage(),
+  AllCategoryPage.routeName: (context) => AllCategoryPage()
 };

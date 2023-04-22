@@ -3,9 +3,8 @@ import 'package:appf_review/page/AccountPage.dart';
 import 'package:appf_review/page/FavoritePage.dart';
 import 'package:appf_review/page/HomePage.dart';
 import 'package:appf_review/page/OrderPage.dart';
-
+import 'package:appf_review/page/NotiPage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class RootPage extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class _RootPageState extends State<RootPage> {
     List<Widget> screen = [
       HomePage(),
       FavoritePage(),
-      FavoritePage(),
+      NotiPage(),
       OrderPage(),
       AccountPage(),
     ];

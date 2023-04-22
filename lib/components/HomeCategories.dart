@@ -1,3 +1,4 @@
+import 'package:appf_review/page/AllCategoryPage.dart';
 import 'package:appf_review/services/firestore_method.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +16,23 @@ class HomeCategories extends StatelessWidget {
             children: [
               Expanded(
                   child: Text(
-                "Popular Products",
+                "Popular Categories",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.green),
               )),
-              Text(
-                'See more',
-                style: TextStyle(fontSize: 16, color: Colors.lightGreen),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AllCategoryPage()),
+                  );
+                },
+                child: Text(
+                  "See more",
+                  style: TextStyle(fontSize: 16, color: Colors.lightGreen),
+                ),
               )
             ],
           ),
