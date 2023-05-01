@@ -1,7 +1,8 @@
 import 'package:appf_review/model/products.dart';
+import 'package:appf_review/page/OrderPage.dart';
 import 'package:appf_review/services/firestore_method.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CheckOutCart extends StatelessWidget {
   double? sum;
@@ -18,7 +19,7 @@ class CheckOutCart extends StatelessWidget {
     );
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
+      children: [
         Expanded(
             child: MaterialButton(
           height: 50,
@@ -39,7 +40,18 @@ class CheckOutCart extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0.0),
               side: BorderSide(color: Colors.green)),
-          onPressed: () => {FirestoreMethods().addOrder(products!, sum)},
+          onPressed: () => {
+            // FirestoreMethods().addOrder(products!, sum),
+            Fluttertoast.showToast(
+                msg: "Checkout successful",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Color.fromARGB(255, 89, 201, 128),
+                textColor: Colors.white,
+                fontSize: 16.0),
+            Navigator.pushNamed(context, OrderPage.routeName)
+          },
           color: Colors.green,
           textColor: Colors.white,
           child: Text(

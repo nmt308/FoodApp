@@ -1,4 +1,6 @@
 import 'package:appf_review/model/notification.dart';
+import 'package:appf_review/services/firestore_method.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class NotiPage extends StatefulWidget {
@@ -10,32 +12,35 @@ class NotiPage extends StatefulWidget {
 }
 
 class _NotiPageState extends State<NotiPage> {
-  List<NotificationItem> _notifications = [
-    NotificationItem(
-        title: "Flash sale 30/4", content: "Sale 50% tất cả trà sữa"),
-    NotificationItem(
-        title: "Flash sale 30/4", content: "Sale 50% tất cả trà sữa"),
-    NotificationItem(
-        title: "Flash sale 30/4", content: "Sale 50% tất cả trà sữa"),
-  ];
+  List<Notifications> notifications = [];
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
         child: ListView.builder(
-          itemCount: _notifications.length,
+          itemCount: notifications.length,
           itemBuilder: (context, index) {
-            return NotiItem(notification: _notifications[index]);
+            return NotiItem(notification: notifications[index]);
           },
         ),
       ),
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+    FirestoreMethods().getNotifications().then((value) {
+      setState(() {
+        notifications = value;
+      });
+    });
+  }
 }
 
 class NotiItem extends StatelessWidget {
-  final NotificationItem notification;
+  final Notifications notification;
 
   NotiItem({required this.notification});
 
@@ -49,8 +54,7 @@ class NotiItem extends StatelessWidget {
             SizedBox(
               height: 60,
               width: 50,
-              child: Image.network(
-                  "https://cdn.tgdd.vn/hoi-dap/1311826/flashsale-la-gi-vao-nhung-ngay-nao-cach-san-flashsale22.jpg"),
+              child: Image.network(notification.image),
             ),
             SizedBox(height: 20, width: 20),
             Expanded(
@@ -60,13 +64,13 @@ class NotiItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Tiêu đề: ${notification.title}',
+                      '${notification.title}',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Nội dung: ${notification.content}',
+                      '${notification.body}',
                       style: TextStyle(fontSize: 16),
                     ),
                   ],

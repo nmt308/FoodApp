@@ -25,13 +25,18 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Container(
-      child: ListView.builder(
-          itemCount: _orders.length,
-          itemBuilder: (context, index) {
-            return OrderItem(order: _orders[index]);
-          }),
+    return Scaffold(
+        body: Row(
+      children: [
+        Expanded(
+            child: Container(
+          child: ListView.builder(
+              itemCount: _orders.length,
+              itemBuilder: (context, index) {
+                return OrderItem(order: _orders[index]);
+              }),
+        )),
+      ],
     ));
   }
 }

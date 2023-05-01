@@ -8,7 +8,7 @@ class AuthMethods {
   Stream<User?> get authChanges => _auth.authStateChanges();
   User get user => _auth.currentUser!;
 
-  void changePassword(String newPassword) async {
+  changePassword(String newPassword) async {
     try {
       // Lấy đối tượng người dùng hiện tại đang đăng nhập
       User? user = FirebaseAuth.instance.currentUser;

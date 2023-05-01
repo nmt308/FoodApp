@@ -40,7 +40,7 @@ class ProductPage extends StatelessWidget {
                     "Name product: ${arguments.product!.title}",
                     style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold, // Đặt độ đậm của chữ là đậm
+                      fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),

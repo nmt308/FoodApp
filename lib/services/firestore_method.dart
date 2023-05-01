@@ -1,9 +1,11 @@
 // import 'package:app/models/UserModel.dart';
 import 'package:appf_review/model/categories.dart';
+import 'package:appf_review/model/notification.dart';
 import 'package:appf_review/model/orders.dart';
 import 'package:appf_review/model/products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' hide Order;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class FirestoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -37,6 +39,20 @@ class FirestoreMethods {
     });
     print(favoriteProducts);
     return favoriteProducts;
+  }
+
+  Future<List<Notifications>> getNotifications() async {
+    List<Notifications> notifications = [];
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('notifications').get();
+    for (DocumentSnapshot snapshot in querySnapshot.docs) {
+      Notifications notification = Notifications(
+          title: snapshot['title'],
+          body: snapshot['body'],
+          image: snapshot['image']);
+      notifications.add(notification);
+    }
+    return notifications;
   }
 
   Future<List<Map<String, dynamic>>> searchProduct(productName) async {
@@ -92,6 +108,17 @@ class FirestoreMethods {
     } catch (e) {
       print("error");
     }
+  }
+
+  addNotification(title, body) async {
+    print(title + body);
+    // Lưu nội dung thông báo vào Firestore
+    await _firestore.collection('notifications').add({
+      'title': title,
+      'body': body,
+    });
+
+    print("add ok");
   }
 
   Future<List<Order>> getOrders() async {

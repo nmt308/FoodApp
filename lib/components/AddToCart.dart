@@ -30,7 +30,6 @@ class _AddProductTocartState extends State<AddProductTocart> {
           onPressed: () {
             Cart cart = Cart();
             cart.addProductToCart(widget.product!);
-            print(cart.getCart().length.toString());
             Fluttertoast.showToast(
                 msg: "Add to cart",
                 toastLength: Toast.LENGTH_SHORT,

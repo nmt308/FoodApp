@@ -2,7 +2,6 @@ import 'package:appf_review/model/carts.dart';
 import 'package:appf_review/model/products.dart';
 import 'package:appf_review/components/CheckOutCart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class CartPage extends StatelessWidget {
   static String routeName = "/carts";
@@ -80,24 +79,58 @@ class _BodyState extends State<Body> {
 }
 
 class CartItem extends StatelessWidget {
-  Products? product;
+  final Products? product;
 
-  CartItem({this.product});
+  const CartItem({Key? key, this.product}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFF5F5F5),
-      padding: EdgeInsets.all(16),
-      child: Row(children: [
-        SizedBox(
-          width: 100,
-          height: 100,
-          child: Image.network((product!.image).toString()),
-        ),
-        Expanded(child: Text((product!.title).toString())),
-        Expanded(child: Text(product!.price.toString())),
-        Icon(Icons.delete_outlined)
-      ]),
+      color: Colors.white,
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                product!.image!,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product!.title!,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '${product!.price} VNĐ',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 16),
+          IconButton(
+            icon: const Icon(Icons.delete_outlined),
+            onPressed: () {},
+          ),
+        ],
+      ),
     );
   }
 }

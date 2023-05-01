@@ -1,6 +1,7 @@
-class NotificationItem {
+class Notifications {
   final String title;
-  final String content;
+  final String body;
+  final String image;
 
-  NotificationItem({required this.title, required this.content});
+  Notifications({required this.title, required this.body, required this.image});
 }

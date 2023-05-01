@@ -1,11 +1,16 @@
 import 'products.dart';
-class Cart{
+
+class Cart {
   static List<Products> cart = [];
-  void addProductToCart(Products product){
+  void addProductToCart(Products product) {
     cart.add(product);
   }
-  List<Products> getCart(){
+
+  List<Products> getCart() {
     return cart;
   }
 
+  clearProduct() {
+    cart = [];
+  }
 }
