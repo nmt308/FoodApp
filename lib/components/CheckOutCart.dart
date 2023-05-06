@@ -1,3 +1,4 @@
+import 'package:appf_review/model/carts.dart';
 import 'package:appf_review/model/products.dart';
 import 'package:appf_review/page/OrderPage.dart';
 import 'package:appf_review/services/firestore_method.dart';
@@ -7,7 +8,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 class CheckOutCart extends StatelessWidget {
   double? sum;
   List<Products>? products;
-  CheckOutCart({this.sum, this.products});
+  Function? clearCart;
+  CheckOutCart({this.sum, this.products, this.clearCart});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,8 @@ class CheckOutCart extends StatelessWidget {
               borderRadius: BorderRadius.circular(0.0),
               side: BorderSide(color: Colors.green)),
           onPressed: () => {
-            // FirestoreMethods().addOrder(products!, sum),
+            FirestoreMethods().addOrder(products!, sum),
+            clearCart!(),
             Fluttertoast.showToast(
                 msg: "Checkout successful",
                 toastLength: Toast.LENGTH_SHORT,
@@ -50,7 +53,7 @@ class CheckOutCart extends StatelessWidget {
                 backgroundColor: Color.fromARGB(255, 89, 201, 128),
                 textColor: Colors.white,
                 fontSize: 16.0),
-            Navigator.pushNamed(context, OrderPage.routeName)
+            // Navigator.pushNamed(context, OrderPage.routeName)
           },
           color: Colors.green,
           textColor: Colors.white,

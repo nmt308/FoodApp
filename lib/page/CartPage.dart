@@ -41,6 +41,15 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    void clearCart() {
+      Cart().clearProduct();
+
+      setState(() {
+        cartdetails = [];
+        sum = 0;
+      });
+    }
+
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -71,6 +80,7 @@ class _BodyState extends State<Body> {
           CheckOutCart(
             products: cartdetails,
             sum: sum,
+            clearCart: clearCart,
           )
         ],
       ),
@@ -125,9 +135,11 @@ class CartItem extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16),
-          IconButton(
-            icon: const Icon(Icons.delete_outlined),
-            onPressed: () {},
+          GestureDetector(
+            child: IconButton(
+              icon: const Icon(Icons.delete_outlined),
+              onPressed: () {},
+            ),
           ),
         ],
       ),

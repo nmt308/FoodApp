@@ -56,7 +56,7 @@ class ProductItemList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 5,
+            width: 15,
           ),
           Expanded(
               child: SizedBox(
@@ -64,6 +64,9 @@ class ProductItemList extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
                   '${product!.title}',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
